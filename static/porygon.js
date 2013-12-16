@@ -10,7 +10,7 @@ function visitObj($container, obj, itterations, ulclass) {
         var $li = $('<li>');
         $li.append('<h2 class="name">' + prop + '</h2>');
         if (typeof obj[prop] === "object") {
-             //visitObj($li, obj[prop], itterations + 1, 'json-value');
+             visitObj($li, obj[prop], itterations + 1, 'json-value');
         } else {
             $li.append('<span class="json-object">'+obj[prop]+'</span>');                   
         }
