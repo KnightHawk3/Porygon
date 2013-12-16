@@ -1,16 +1,28 @@
-function visitObj($container, obj, itterations) {
-    var $ul = $('<ul>');
+var starting_itter = 3;
+function visitObj($container, obj, itterations, ulclass) {
+    if (ulclass) {
+        var $ul = $('<ul class='+ulclass+'>');
+    } else {
+        var $ul = $('<ul>');
+    }
 
     for (var prop in obj) {
         var $li = $('<li>');
-        $li.append('<span class="json-key"><h' + itterations + '>' + prop + ': </h' + itterations + '></span>');
+        $li.append('<h2 class="name">' + prop + '</h2>');
         if (typeof obj[prop] === "object") {
-             visitObj($li, obj[prop], itterations + 1);
+             //visitObj($li, obj[prop], itterations + 1, 'json-value');
         } else {
-            $li.append('<span class="json-value">'+obj[prop]+'</span>');                   
+            $li.append('<span class="json-object">'+obj[prop]+'</span>');                   
         }
         $ul.append($li);
     }
     $container.append($ul);
 }
-$(document).ready(function () {visitObj($("#json-viewer"), pokedex, 1);});
+
+visitObj($("#pokemon"), pokedex, starting_itter, 'list');
+
+var options = {
+  valueNames: ['name', 'id']
+};
+
+var userList = new List('pokemon', options);
