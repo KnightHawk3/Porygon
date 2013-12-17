@@ -19,8 +19,7 @@ function parsePokedex($container, pokedex, itterations, ulclass) {
 parsePokedex($("#pokemon"), pokedex_dictionary, starting_itter, 'list');
 
 var options = {
-  valueNames: ['name', 'id'],
-  indexAsync: true
+  valueNames: ['name', 'id']
 };
 
 var userList = new List('pokemon', options);
