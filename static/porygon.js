@@ -1,10 +1,6 @@
 var starting_itter = 3;
-function parsePokedex($container, pokedex, itterations, ulclass) {
-    if (ulclass) {
-        var $ul = $('<ul class='+ulclass+'>');
-    } else {
-        var $ul = $('<ul>');
-    }
+function parsePokedex($container, pokedex, itterations) {
+    var $ul = $('<ul class="list list-inline">');
 
     for (var pokemon in pokedex) {
         var $li = $('<li>'); // Start the item for the pokemon
@@ -30,7 +26,7 @@ function makebar(percent) {
     return background;
 }
 
-parsePokedex($("#pokemon"), pokedex_dictionary, starting_itter, 'list');
+parsePokedex($("#pokemon"), pokedex_dictionary, starting_itter);
 
 var options = {
   valueNames: ['name', 'id', 'types', 'gender']
