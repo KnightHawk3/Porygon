@@ -13,6 +13,7 @@ h1, h2, h3, h4, h5 {
 
 li {
     width: 210px;
+    height: 130px;
     background-color: #EFEFEF;
     padding: 5px !important;
     margin: 5px;
@@ -22,10 +23,34 @@ li {
     text-transform:capitalize;
 }
 
+.gender-container {
+    text-align: center;
+    padding: 0 3;
+}
 
-.gender{
-    width: 100%;
+.data-label {
+    text-align: left;
+}
+
+.gender {
+    width: 50%;
+    display: inline-block;
+    margin: 0 4px -4px;
+}
+
+.genderless {
     color: #999999;
+    text-align: center;
+}
+
+.rightalignedgender {
+    float: right;
+    padding: 0 5px;
+}
+
+.leftalignedgender {
+    float: left;
+    padding: 0 5px;
 }
 
 /* Wrapper for page content to push down footer */
