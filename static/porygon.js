@@ -30,7 +30,7 @@ function makebar(percent) {
     return background;
 }
 
-parsePokedex($("#pokemon"), pokedex_dictionary, starting_itter, 'list-und');
+parsePokedex($("#pokemon"), pokedex_dictionary, starting_itter, 'list');
 
 var options = {
   valueNames: ['name', 'id', 'types', 'gender']
