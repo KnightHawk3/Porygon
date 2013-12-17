@@ -12,11 +12,11 @@ h1, h2, h3, h4, h5 {
 }
 
 li {
-    width: 210px;
+    width: 280px;
     height: 130px;
     background-color: #EFEFEF;
     padding: 10px !important;
-    margin: 3px;
+    margin: 5px;
 }
 
 .versionnumber {
@@ -82,7 +82,7 @@ li {
 
 .container {
   width: auto;
-  max-width: 1110px;
+  max-width: 1200px;
   padding: 0 15px;
 }
 .container .text-muted {
