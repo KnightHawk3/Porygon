@@ -11,7 +11,7 @@ function parsePokedex($container, pokedex, itterations) {
         if (pokedex[pokemon]["gender ratio"]){
             $li.append('</br><span class="gender">Gender: ' + makebar(pokedex[pokemon]["gender ratio"]["M"]*100)+'</span>');
         } else if (pokedex[pokemon]["gender"]){
-            $li.append('</br><span class="gender">Gender: Genderless</span>');
+            $li.append('</br><span class="gender">Gender: ' + makebar(100) + '</span>');
         } else {
             $li.append('</br><span class="gender">Gender: ' + makebar(50)+ "</span>");
         }

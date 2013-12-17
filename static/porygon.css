@@ -11,12 +11,18 @@ h1, h2, h3, h4, h5 {
     display: inline;
 }
 
+li {
+    width: 210px;
+    height: 150px;
+    background-color: #EFEFEF;
+    margin: 5px;
+}
 .name {
     text-transform:capitalize;
 }
 
 .gender{
-    width: 140;
+    width: 190px; /* Because li is 200 */
 }
 
 /* Wrapper for page content to push down footer */
@@ -42,7 +48,7 @@ h1, h2, h3, h4, h5 {
 
 .container {
   width: auto;
-  max-width: 680px;
+  max-width: 980px;
   padding: 0 15px;
 }
 .container .text-muted {
