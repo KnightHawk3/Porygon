@@ -13,11 +13,11 @@ function parsePokedex($container, pokedex, itterations, ulclass) {
         $li.append('</br><span class="id">Pokedex Number: ' + pokedex[pokemon]["num"] +"</span>")
         $li.append('</br><span class="types">Types: ' + pokedex[pokemon]["types"] +"</span>")
         if (pokedex[pokemon]["gender ratio"]){
-            $li.append("</br>Gender: " + makebar(pokedex[pokemon]["gender ratio"]["M"]*100));
+            $li.append('</br><span class="gender">Gender: ' + makebar(pokedex[pokemon]["gender ratio"]["M"]*100)+'</span>');
         } else if (pokedex[pokemon]["gender"]){
-            $li.append("</br>Gender: Genderless");
+            $li.append('</br><span class="gender">Gender: Genderless</span>');
         } else {
-            $li.append('<span class="gender"></br>Gender: ' + makebar(50)+ "</span>");
+            $li.append('</br><span class="gender">Gender: ' + makebar(50)+ "</span>");
         }
         $ul.append($li); // Add the item to the list
     }
@@ -26,14 +26,14 @@ function parsePokedex($container, pokedex, itterations, ulclass) {
 
 function makebar(percent) {
     var percentFemale = 100 - percent;
-    var background = '<div class="progress gender" style="background: -o-linear-gradient(left, #3399FF '+percent+'%, #FF99CC ' + percentFemale+'%); background: -moz-linear-gradient(left, #3399FF '+percent+'%, #FF99CC '+ percentFemale+'%); background: -webkit-linear-gradient(left, #3399FF '+percent+'%, #FF99CC '+ percentFemale+'%); background: linear-gradient(left, #3399FF '+percent+'%, #FF99CC '+ parseInt(percentFemale)+'%); background: -ms-linear-gradient(left, #3399FF '+percent+'%, #FF99CC '+ percentFemale+'%);"></div>';
+    var background = '<div class="progress gender" style="background: -o-linear-gradient(left, #3399FF '+percent+'%, #FF99CC 0%); background: -moz-linear-gradient(left, #3399FF '+percent+'%, #FF99CC 0%); background: -webkit-linear-gradient(left, #3399FF '+percent+'%, #FF99CC 0%); background: linear-gradient(left, #3399FF '+percent+'%, #FF99CC 0%); background: -ms-linear-gradient(left, #3399FF '+percent+'%, #FF99CC 0%);"></div>';
     return background;
 }
 
 parsePokedex($("#pokemon"), pokedex_dictionary, starting_itter, 'list-und');
 
 var options = {
-  valueNames: ['name', 'id', 'types']
+  valueNames: ['name', 'id', 'types', 'gender']
 };
 
 var userList = new List('pokemon', options);
