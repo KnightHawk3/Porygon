@@ -9,20 +9,23 @@ function parsePokedex($container, pokedex, itterations) {
         $li.append('</br><span class="id">Pokedex Number: ' + pokedex[pokemon]["num"] +"</span>")
         $li.append('</br><span class="types">Types: ' + pokedex[pokemon]["types"] +"</span>")
         if (pokedex[pokemon]["gender ratio"]){
-            $li.append('</br><span class="gender">Gender: ' + makebar(pokedex[pokemon]["gender ratio"]["M"]*100)+'</span>');
+            $li.append('</br>Gender: ' + makebar(pokedex[pokemon]["gender ratio"]["M"]*100, '#3399FF', '#FF99CC'));
         } else if (pokedex[pokemon]["gender"]){
-            $li.append('</br><span class="gender">Gender: ' + makebar(100) + '</span>');
+            $li.append('</br>Gender: ' + makebar(100));
         } else {
-            $li.append('</br><span class="gender">Gender: ' + makebar(50)+ "</span>");
+            $li.append('</br>Gender: ' + makebar(50, '#3399FF', '#FF99CC'));
         }
         $ul.append($li); // Add the item to the list
     }
     $container.append($ul); // Add the list to the div
 }
 
-function makebar(percent) {
-    var percentFemale = 100 - percent;
-    var background = '<div class="progress gender" style="background: -o-linear-gradient(left, #3399FF '+percent+'%, #FF99CC 0%); background: -moz-linear-gradient(left, #3399FF '+percent+'%, #FF99CC 0%); background: -webkit-linear-gradient(left, #3399FF '+percent+'%, #FF99CC 0%); background: linear-gradient(left, #3399FF '+percent+'%, #FF99CC 0%); background: -ms-linear-gradient(left, #3399FF '+percent+'%, #FF99CC 0%);"></div>';
+function makebar(percent, color1, color2) {
+    if (color1 && color2) {
+        var background = '<div class="progress gender" style="background: -o-linear-gradient(left, '+ color1 +' '+percent+'%, '+ color2 +' 0%); background: -moz-linear-gradient(left, '+ color1 +' '+percent+'%, '+ color2 +' 0%); background: -webkit-linear-gradient(left, '+ color1 +' '+percent+'%, '+ color2 +' 0%); background: linear-gradient(left, '+ color1 +' '+percent+'%, '+ color2 +' 0%); background: -ms-linear-gradient(left, '+ color1 +' '+percent+'%, '+ color2 +' 0%);"></div>';
+    } else {
+        var background = '<div class="progress gender"><center>Genderless</center></div>';
+    }
     return background;
 }
 
