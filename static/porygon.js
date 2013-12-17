@@ -1,32 +1,21 @@
 var starting_itter = 3;
-function visitObj($container, obj, itterations, ulclass) {
+function parsePokedex($container, pokedex, itterations, ulclass) {
     if (ulclass) {
         var $ul = $('<ul class='+ulclass+'>');
     } else {
         var $ul = $('<ul>');
     }
 
-    for (var prop in obj) {
-        var $li = $('<li>');
-        if (itterations != starting_itter) {
-            var colon = ": ";
-        } else {
-            var colon = "";
-        }
-        if (prop != 0) {
-            $li.append('<h'+itterations+' class="name">' + prop + '</h'+itterations+'>'+colon);
-        }
-        if (typeof obj[prop] === "object") {
-             visitObj($li, obj[prop], itterations + 1, 'json-value');
-        } else {
-            $li.append('<span class="json-object">'+obj[prop]+'</span>');
-        }
-        $ul.append($li);
+    for (var pokemon in pokedex) {
+        var $li = $('<li>'); // Start the item for the pokemon
+        $li.append('<h'+itterations+' class="name">' + pokemon + '</h'+itterations+'>'); // Print the pokemon
+        //parsePokedex($li, pokedex[pokemon], itterations + 1, 'json-value');
+        $ul.append($li); // Add the item to the list
     }
-    $container.append($ul);
+    $container.append($ul); // Add the list to the div
 }
 
-visitObj($("#pokemon"), pokedex, starting_itter, 'list');
+parsePokedex($("#pokemon"), pokedex_dictionary, starting_itter, 'list');
 
 var options = {
   valueNames: ['name', 'id']
