@@ -15,14 +15,17 @@ li {
     width: 210px;
     height: 150px;
     background-color: #EFEFEF;
+    padding: 5px !important;
     margin: 5px;
 }
+
 .name {
     text-transform:capitalize;
 }
 
+
 .gender{
-    width: 190px; /* Because li is 200 */
+    width: 100%;
 }
 
 /* Wrapper for page content to push down footer */
