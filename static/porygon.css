@@ -19,6 +19,12 @@ li {
     margin: 5px;
 }
 
+.commitnumber {
+    position: fixed;
+    top: 0;
+    right: 0;
+}
+
 .name {
     text-transform:capitalize;
 }

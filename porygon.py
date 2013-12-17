@@ -1,5 +1,6 @@
 # Imports
 import sqlite3
+import git
 from flask import Flask, request, session, g, redirect, url_for, \
     abort, render_template, flash
 
@@ -9,6 +10,8 @@ DEBUG = True
 SECRET_KEY = 'password'
 USERNAME = 'admin'
 PASSWORD = 'admin'
+
+repo = git.Repo("")
 
 # Start app
 app = Flask(__name__)
@@ -40,7 +43,7 @@ def close_db(error):
 
 @app.route('/')
 def show_index():
-    return render_template('index.html')
+    return render_template('index.html', commit=str(repo.heads[0].commit)[:10])
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0')
