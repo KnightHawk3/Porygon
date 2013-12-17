@@ -15,6 +15,10 @@ h1, h2, h3, h4, h5 {
     text-transform:capitalize;
 }
 
+.gender{
+    width: 140;
+}
+
 /* Wrapper for page content to push down footer */
 #wrap {
   min-height: 100%;
