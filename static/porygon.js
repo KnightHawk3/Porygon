@@ -6,11 +6,11 @@ function parsePokedex($container, pokedex, itterations) {
         var $li = $('<li class="pokemon-card">'); // Start the item for the pokemon
         $li.append('<h'+itterations+' class="name">' + pokemon + '</h'+itterations+'>'); // Print the pokemon
         //parsePokedex($li, pokedex[pokemon], itterations + 1, 'json-value');
-        $li.append('<div class="id">Pokedex Number: ' + pokedex[pokemon]["num"] +"</div>")
+        $li.append('<div class="id-container">Pokedex Number: <span class="id">' + pokedex[pokemon]["num"] + "</span></div>")
         if (pokedex[pokemon]["types"][1]) {
-            $li.append('<div class="types">Types: ' + pokedex[pokemon]["types"][0] + ", " + pokedex[pokemon]["types"][1] + "</div>");
+            $li.append('<div class="types-container">Types: <span=class"types">' + pokedex[pokemon]["types"][0] + ", " + pokedex[pokemon]["types"][1] + "</span></div>");
         } else {
-            $li.append('<div class="types">Types: ' + pokedex[pokemon]["types"][0] + "</div>");
+            $li.append('<div class="types-container">Types: <span class="types">' + pokedex[pokemon]["types"][0] + "</span></div>");
         }
         if (pokedex[pokemon]["gender ratio"]){
             $li.append('Gender:<div class="gender-container">' + makebar(pokedex[pokemon]["gender ratio"]["M"]*100, '#3399FF', '#FF99CC'));
