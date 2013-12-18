@@ -10,10 +10,16 @@ function parsePokedex($container, pokedex, itterations) {
         $li.append('</br><span class="types">Types: ' + pokedex[pokemon]["types"] +"</span>")
         if (pokedex[pokemon]["gender ratio"]){
             $li.append('</br>Gender:<div class="gender-container">' + makebar(pokedex[pokemon]["gender ratio"]["M"]*100, '#3399FF', '#FF99CC'));
-        } else if (pokedex[pokemon]["gender"]){
-            $li.append('</br>Gender:<div class="gender-container">' + makebar()+ '</div>');
+        } else if (pokedex[pokemon]["gender"]) {
+            if (pokedex[pokemon]["gender"] == "M") {
+                $li.append('</br>Gender:<div class="gender-container">' + makebar(100, '#3399FF', '#FF99CC')+ '</div>');
+            } else if (pokedex[pokemon]["gender"] == "F"){
+                $li.append('</br>Gender:<div class="gender-container">' + makebar(0, '#3399FF', '#FF99CC')+ '</div>');
+            } else {
+                $li.append('</br>Gender:<div class="gender-container">' + makebar()+ '</div>');
+            }
         } else {
-            $li.append('</br>Gender:<div class="gender-container">' + makebar(50, '#3399FF', '#FF99CC')+ '</div>');
+                $li.append('</br>Gender:<div class="gender-container">' + makebar(50, '#3399FF', '#FF99CC')+ '</div>');
         }
         $ul.append($li); // Add the item to the list
     }
