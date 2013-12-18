@@ -6,20 +6,24 @@ function parsePokedex($container, pokedex, itterations) {
         var $li = $('<li>'); // Start the item for the pokemon
         $li.append('<h'+itterations+' class="name">' + pokemon + '</h'+itterations+'>'); // Print the pokemon
         //parsePokedex($li, pokedex[pokemon], itterations + 1, 'json-value');
-        $li.append('</br><span class="id">Pokedex Number: ' + pokedex[pokemon]["num"] +"</span>")
-        $li.append('</br><span class="types">Types: ' + pokedex[pokemon]["types"] +"</span>")
+        $li.append('<div class="id">Pokedex Number: ' + pokedex[pokemon]["num"] +"</div>")
+        if (pokedex[pokemon]["types"][1]) {
+            $li.append('<div class="types">Types: ' + pokedex[pokemon]["types"][0] + ", " + pokedex[pokemon]["types"][1] + "</div>");
+        } else {
+            $li.append('<div class="types">Types: ' + pokedex[pokemon]["types"][0] + "</div>");
+        }
         if (pokedex[pokemon]["gender ratio"]){
-            $li.append('</br>Gender:<div class="gender-container">' + makebar(pokedex[pokemon]["gender ratio"]["M"]*100, '#3399FF', '#FF99CC'));
+            $li.append('Gender:<div class="gender-container">' + makebar(pokedex[pokemon]["gender ratio"]["M"]*100, '#3399FF', '#FF99CC'));
         } else if (pokedex[pokemon]["gender"]) {
             if (pokedex[pokemon]["gender"] == "M") {
-                $li.append('</br>Gender:<div class="gender-container">' + makebar(100, '#3399FF', '#FF99CC')+ '</div>');
+                $li.append('Gender:<div class="gender-container">' + makebar(100, '#3399FF', '#FF99CC')+ '</div>');
             } else if (pokedex[pokemon]["gender"] == "F"){
-                $li.append('</br>Gender:<div class="gender-container">' + makebar(0, '#3399FF', '#FF99CC')+ '</div>');
+                $li.append('Gender:<div class="gender-container">' + makebar(0, '#3399FF', '#FF99CC')+ '</div>');
             } else {
-                $li.append('</br>Gender:<div class="gender-container">' + makebar()+ '</div>');
+                $li.append('Gender:<div class="gender-container">' + makebar()+ '</div>');
             }
         } else {
-                $li.append('</br>Gender:<div class="gender-container">' + makebar(50, '#3399FF', '#FF99CC')+ '</div>');
+                $li.append('Gender:<div class="gender-container">' + makebar(50, '#3399FF', '#FF99CC')+ '</div>');
         }
         $ul.append($li); // Add the item to the list
     }
