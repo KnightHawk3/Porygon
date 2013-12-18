@@ -14,7 +14,7 @@ h1, h2, h3, h4, h5 {
 li {
     width: 280px;
     height: 130px;
-    background-color: #EFEFEF;
+    background-color: #F0F0F0;
     padding: 10px !important;
     margin: 5px;
 }
@@ -24,6 +24,23 @@ li {
     bottom: 0;
     right: 0;
     margin: 5 5 5;
+}
+
+.form-search{
+    display: inline;
+    width: 77%;
+    float: left;
+    margin: 0 0 0 5;
+}
+
+.search-button {
+    width: 10%;
+    margin: 0 5px;
+    float: right;
+}
+
+#search-container {
+    width: 100%;
 }
 
 .donate {
@@ -89,7 +106,7 @@ li {
 
 .container {
   width: auto;
-  max-width: 1200px;
+  max-width: 1190px;
   padding: 0 15px;
 }
 .container .text-muted {
