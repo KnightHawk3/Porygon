@@ -42,7 +42,8 @@ function makebar(percent, color1, color2) {
 parsePokedex($("#pokemon"), pokedex_dictionary, starting_itter);
 
 var options = {
-  valueNames: ['name', 'id', 'types', 'gender']
+  valueNames: ['name', 'id', 'types']
 };
 
 var userList = new List('pokemon', options);
+userList.sort('id', {asc:true});
