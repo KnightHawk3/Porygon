@@ -1,45 +1,70 @@
-var starting_itter = 3;
-function parsePokedex($container, pokedex, itterations) {
+function parsePokedex($container, pokedex) {
     var $ul = $('<ul class="list list-inline">');
 
     for (var pokemon in pokedex) {
         var $li = $('<li class="pokemon-card">'); // Start the item for the pokemon
-        $li.append('<h'+itterations+' class="name">' + pokemon + '</h'+itterations+'>'); // Print the pokemon
-        //parsePokedex($li, pokedex[pokemon], itterations + 1, 'json-value');
-        $li.append('<div class="id-container">Pokedex Number: <span class="id">' + pokedex[pokemon]["num"] + "</span></div>")
+        // Print the name of the pokemon as a H1 class name
+        $li.append('<h3 class="name">' + pokemon + '</h3>');
+        // Print the ID of the pokemon div class id-container span class id
+        $li.append('<div class="id-container">Pokedex Number: <span class="id">' + pokedex[pokemon]["num"] + "</span></div>");
+        
+        // Print the types of the pokemon
         if (pokedex[pokemon]["types"][1]) {
             $li.append('<div class="types-container">Types: <span=class"types">' + pokedex[pokemon]["types"][0] + ", " + pokedex[pokemon]["types"][1] + "</span></div>");
         } else {
             $li.append('<div class="types-container">Types: <span class="types">' + pokedex[pokemon]["types"][0] + "</span></div>");
         }
+
+        // Create some Gender Ratio Bars
         if (pokedex[pokemon]["gender ratio"]){
-            $li.append('Gender:<div class="gender-container">' + makebar(pokedex[pokemon]["gender ratio"]["M"]*100, '#3399FF', '#FF99CC'));
+            // if they have a gender ratio value, create a bar filled with blue to the percent male, therefore leaving the rest pink
+            $li.append('Gender:<div class="gender-container">' + makeGenderBar(pokedex[pokemon]["gender ratio"]["M"]*100, '#3399FF', '#FF99CC'));
+        // Create some base stat bars
+        $li.append('<table style="width:100%">');
+        $li.append('<tr><td>HP: </td><td style="width:200">' + makeStatBar(pokedex[pokemon]["base stats"]["hp"], "#FF5050") + "</td></tr>");
+        $li.append('<tr><td>Attack: </td><td>' +  makeStatBar(pokedex[pokemon]["base stats"]["atk"], "#FF9933") + "</td></tr>");
+        $li.append('<tr><td>Defence: </td><td>' + makeStatBar(pokedex[pokemon]["base stats"]["def"], "#FFFF94") + "</td></tr>");
+        $li.append('<tr><td>Sp. Atk: </td><td>' + makeStatBar(pokedex[pokemon]["base stats"]["spa"], "#0099FF") + "</td></tr>");
+        $li.append('<tr><td>Sp. Def: </td><td>' + makeStatBar(pokedex[pokemon]["base stats"]["spd"], "#0033CC") + "</td></tr>");
+        $li.append('<tr><td>Speed: </td><td>' +   makeStatBar(pokedex[pokemon]["base stats"]["spe"], "#00CC00") + "</td></tr>");
+        $li.append('</table>');
+        // If the pokemon has a gender value (and therefore is all one gender)
         } else if (pokedex[pokemon]["gender"]) {
+            // If they are all male, make an all male bar
             if (pokedex[pokemon]["gender"] == "M") {
-                $li.append('Gender:<div class="gender-container">' + makebar(100, '#3399FF', '#FF99CC')+ '</div>');
+                $li.append('Gender:<div class="gender-container">' + makeGenderBar(100, '#3399FF', '#FF99CC')+ '</div>');
+            // If they are all female, make an all female bar
             } else if (pokedex[pokemon]["gender"] == "F"){
-                $li.append('Gender:<div class="gender-container">' + makebar(0, '#3399FF', '#FF99CC')+ '</div>');
+                $li.append('Gender:<div class="gender-container">' + makeGenderBar(0, '#3399FF', '#FF99CC')+ '</div>');
+            // If they dont have either then make a genderless bar
             } else {
-                $li.append('Gender:<div class="gender-container">' + makebar()+ '</div>');
+                $li.append('Gender:<div class="gender-container">' + makeGenderBar()+ '</div>');
             }
+        // If they dont have a gender or a gender ratio then they are 50/50, make a 50% male bar
         } else {
-                $li.append('Gender:<div class="gender-container">' + makebar(50, '#3399FF', '#FF99CC')+ '</div>');
+                $li.append('Gender:<div class="gender-container">' + makeGenderBar(50, '#3399FF', '#FF99CC')+ '</div>');
         }
+
+
         $ul.append($li); // Add the item to the list
     }
     $container.append($ul); // Add the list to the div
 }
 
-function makebar(percent, color1, color2) {
+function makeStatBar(stat, color1) {
+    return stat + ' <div class="progress bar stat" style="background: -o-linear-gradient(left, '+ color1 +' '+stat+'%, rgba(0,0,0,1) 0%); background: -moz-linear-gradient(left, '+ color1 +' '+stat+'%, rgba(0,0,0,1) 0%); background: -webkit-linear-gradient(left, '+ color1 +' '+stat+'%, rgba(0,0,0,1) 0%); background: linear-gradient(left, '+ color1 +' '+stat+'%, rgba(0,0,0,1) 0%); background: -ms-linear-gradient(left, '+ color1 +' '+stat+'%, rgba(0,0,0,)1 0%);"></div>';
+}
+
+function makeGenderBar(percent, color1, color2) {
     if (color1 && color2) {
-        var background = percent + '% <div class="progress gender" style="background: -o-linear-gradient(left, '+ color1 +' '+percent+'%, '+ color2 +' 0%); background: -moz-linear-gradient(left, '+ color1 +' '+percent+'%, '+ color2 +' 0%); background: -webkit-linear-gradient(left, '+ color1 +' '+percent+'%, '+ color2 +' 0%); background: linear-gradient(left, '+ color1 +' '+percent+'%, '+ color2 +' 0%); background: -ms-linear-gradient(left, '+ color1 +' '+percent+'%, '+ color2 +' 0%);"></div>'+(100-percent)+'%';
+        var background = percent + '% <div class="progress bar" style="background: -o-linear-gradient(left, '+ color1 +' '+percent+'%, '+ color2 +' 0%); background: -moz-linear-gradient(left, '+ color1 +' '+percent+'%, '+ color2 +' 0%); background: -webkit-linear-gradient(left, '+ color1 +' '+percent+'%, '+ color2 +' 0%); background: linear-gradient(left, '+ color1 +' '+percent+'%, '+ color2 +' 0%); background: -ms-linear-gradient(left, '+ color1 +' '+percent+'%, '+ color2 +' 0%);"></div>'+(100-percent)+'%';
     } else {
-        var background = '<div class="progress gender genderless">Genderless</div>';
+        var background = '<div class="progress bar genderless">Genderless</div>';
     }
     return background;
 }
 
-parsePokedex($("#pokemon"), pokedex_dictionary, starting_itter);
+parsePokedex($("#pokemon"), pokedex_dictionary);
 
 var options = {
   valueNames: ['name', 'id', 'types']

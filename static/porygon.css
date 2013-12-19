@@ -11,9 +11,13 @@ h1, h2, h3, h4, h5 {
     display: inline;
 }
 
+.stat {
+    display: inline;
+}
+
 .pokemon-card {
     width: 280px;
-    height: 130px;
+    height: 300px;
     background-color: #F0F0F0;
     padding: 10px !important;
     margin: 5px;
@@ -70,7 +74,7 @@ h1, h2, h3, h4, h5 {
     text-align: left;
 }
 
-.gender {
+.bar {
     width: 50%;
     display: inline-block;
     margin: 0 4px -4px;
