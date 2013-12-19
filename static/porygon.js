@@ -16,7 +16,7 @@ function parsePokedex($container, pokedex) {
         }
         // Create some base stat bars
         $li.append('<table style="width:100%">');
-        $li.append('<tr><td>HP: </td><td style="width:200">' + makeStatBar(pokedex[pokemon]["base stats"]["hp"], "#FF5050") + "</td></tr>");
+        $li.append('<tr><td>HP: </td><td style="width:20">' + makeStatBar(pokedex[pokemon]["base stats"]["hp"], "#FF5050") + "</td></tr>");
         $li.append('<tr><td>Attack: </td><td>' +  makeStatBar(pokedex[pokemon]["base stats"]["atk"], "#FF9933") + "</td></tr>");
         $li.append('<tr><td>Defence: </td><td>' + makeStatBar(pokedex[pokemon]["base stats"]["def"], "#FFFF94") + "</td></tr>");
         $li.append('<tr><td>Sp. Atk: </td><td>' + makeStatBar(pokedex[pokemon]["base stats"]["spa"], "#0099FF") + "</td></tr>");
@@ -53,12 +53,12 @@ function parsePokedex($container, pokedex) {
 
 function makeStatBar(stat, color1) {
     var scaledStat = (stat / 200) * 100;
-    return stat + ' <div class="progress bar stat" style="background: -o-linear-gradient(left, '+ color1 +' '+scaledStat+'%, rgba(0,0,0,1) 0%); background: -moz-linear-gradient(left, '+ color1 +' '+scaledStat+'%, rgba(0,0,0,1) 0%); background: -webkit-linear-gradient(left, '+ color1 +' '+scaledStat+'%, rgba(0,0,0,1) 0%); background: linear-gradient(left, '+ color1 +' '+scaledStat+'%, rgba(0,0,0,1) 0%); background: -ms-linear-gradient(left, '+ color1 +' '+scaledStat+'%, rgba(0,0,0,)1 0%);"></div>';
+    return stat + '</td><td class="statbar-td"> <div class="progress bar statbar" style="background: -o-linear-gradient(left, '+ color1 +' '+scaledStat+'%, rgba(0,0,0,0) 0%); background: -moz-linear-gradient(left, '+ color1 +' '+scaledStat+'%, rgba(0,0,0,0) 0%); background: -webkit-linear-gradient(left, '+ color1 +' '+scaledStat+'%, rgba(0,0,0,0) 0%); background: linear-gradient(left, '+ color1 +' '+scaledStat+'%, rgba(0,0,0,0) 0%); background: -ms-linear-gradient(left, '+ color1 +' '+scaledStat+'%, rgba(0,0,0,0) 0%);"></div>';
 }
 
 function makeGenderBar(percent, color1, color2) {
     if (color1 && color2) {
-        var background = percent + '% <div class="progress bar" style="background: -o-linear-gradient(left, '+ color1 +' '+percent+'%, '+ color2 +' 0%); background: -moz-linear-gradient(left, '+ color1 +' '+percent+'%, '+ color2 +' 0%); background: -webkit-linear-gradient(left, '+ color1 +' '+percent+'%, '+ color2 +' 0%); background: linear-gradient(left, '+ color1 +' '+percent+'%, '+ color2 +' 0%); background: -ms-linear-gradient(left, '+ color1 +' '+percent+'%, '+ color2 +' 0%);"></div>'+(100-percent)+'%';
+        var background = percent + '% <div class="progress bar genderbar" style="background: -o-linear-gradient(left, '+ color1 +' '+percent+'%, '+ color2 +' 0%); background: -moz-linear-gradient(left, '+ color1 +' '+percent+'%, '+ color2 +' 0%); background: -webkit-linear-gradient(left, '+ color1 +' '+percent+'%, '+ color2 +' 0%); background: linear-gradient(left, '+ color1 +' '+percent+'%, '+ color2 +' 0%); background: -ms-linear-gradient(left, '+ color1 +' '+percent+'%, '+ color2 +' 0%);"></div>'+(100-percent)+'%';
     } else {
         var background = '<div class="progress bar genderless">Genderless</div>';
     }

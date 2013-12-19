@@ -9,7 +9,7 @@ DEBUG = True
 SECRET_KEY = 'password'
 USERNAME = 'admin'
 PASSWORD = 'admin'
-VERSION = '0.0.1 "Brass Monkey"'
+VERSION = '0.0.2 "Listen all of y\'all it\'s a sabotage"'
 
 # Start app
 app = Flask(__name__)

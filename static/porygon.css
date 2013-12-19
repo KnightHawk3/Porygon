@@ -74,7 +74,17 @@ h1, h2, h3, h4, h5 {
     text-align: left;
 }
 
-.bar {
+.statbar {
+    width: 80%;
+    display: inline-block;
+    margin: 0 4px -4px;
+}
+
+.statbar-td {
+    width: 90%;
+}
+
+.genderbar {
     width: 50%;
     display: inline-block;
     margin: 0 4px -4px;
