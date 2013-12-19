@@ -11,7 +11,7 @@ function parsePokedex($container, pokedex) {
         // Print the types of the pokemon
         $li.append('<div class="types-container">Type(s): <span class="types">' + pokedex[pokemon]["types"].join(", ") + "</span></div>");
 
-        $li.append('<div class="egg-container"> Egg Group(s): ' + pokedex[pokemon]["egg groups"].join(", "));
+        $li.append('<div class="egg-container"> Egg Group(s): <span class="egg-groups">' + pokedex[pokemon]["egg groups"].join(", ") + "</span>");
         // Create some base stat bars
         $li.append('<table style="width:100%">');
         $li.append('<tr><td>HP: </td><td style="width:20">' + makeStatBar(pokedex[pokemon]["base stats"]["hp"], "#FF5050") + "</td></tr>");
@@ -66,7 +66,7 @@ function makeGenderBar(percent, color1, color2) {
 parsePokedex($("#pokemon"), pokedex_dictionary);
 
 var options = {
-  valueNames: ['name', 'id', 'types']
+  valueNames: ['name', 'id', 'types', 'egg-groups']
 };
 
 var userList = new List('pokemon', options);
