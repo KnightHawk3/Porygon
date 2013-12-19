@@ -60,7 +60,7 @@ function makeGenderBar(percent, color1, color2) {
     if (color1 && color2) {
         var background = percent + '% <div class="progress bar genderbar" style="background: -o-linear-gradient(left, '+ color1 +' '+percent+'%, '+ color2 +' 0%); background: -moz-linear-gradient(left, '+ color1 +' '+percent+'%, '+ color2 +' 0%); background: -webkit-linear-gradient(left, '+ color1 +' '+percent+'%, '+ color2 +' 0%); background: linear-gradient(left, '+ color1 +' '+percent+'%, '+ color2 +' 0%); background: -ms-linear-gradient(left, '+ color1 +' '+percent+'%, '+ color2 +' 0%);"></div>'+(100-percent)+'%';
     } else {
-        var background = '<div class="progress bar genderless">Genderless</div>';
+        var background = '<div class="progress bar genderbar genderless">Genderless</div>';
     }
     return background;
 }
