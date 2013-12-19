@@ -9,11 +9,9 @@ function parsePokedex($container, pokedex) {
         $li.append('<div class="id-container">Pokedex Number: <span class="id">' + pokedex[pokemon]["num"] + "</span></div>");
         
         // Print the types of the pokemon
-        if (pokedex[pokemon]["types"][1]) {
-            $li.append('<div class="types-container">Types: <span=class"types">' + pokedex[pokemon]["types"][0] + ", " + pokedex[pokemon]["types"][1] + "</span></div>");
-        } else {
-            $li.append('<div class="types-container">Types: <span class="types">' + pokedex[pokemon]["types"][0] + "</span></div>");
-        }
+        $li.append('<div class="types-container">Type(s): <span class="types">' + pokedex[pokemon]["types"].join(", ") + "</span></div>");
+
+        $li.append('<div class="egg-container"> Egg Group(s): ' + pokedex[pokemon]["egg groups"].join(", "));
         // Create some base stat bars
         $li.append('<table style="width:100%">');
         $li.append('<tr><td>HP: </td><td style="width:20">' + makeStatBar(pokedex[pokemon]["base stats"]["hp"], "#FF5050") + "</td></tr>");
