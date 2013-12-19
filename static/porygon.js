@@ -52,7 +52,8 @@ function parsePokedex($container, pokedex) {
 }
 
 function makeStatBar(stat, color1) {
-    return stat + ' <div class="progress bar stat" style="background: -o-linear-gradient(left, '+ color1 +' '+stat+'%, rgba(0,0,0,1) 0%); background: -moz-linear-gradient(left, '+ color1 +' '+stat+'%, rgba(0,0,0,1) 0%); background: -webkit-linear-gradient(left, '+ color1 +' '+stat+'%, rgba(0,0,0,1) 0%); background: linear-gradient(left, '+ color1 +' '+stat+'%, rgba(0,0,0,1) 0%); background: -ms-linear-gradient(left, '+ color1 +' '+stat+'%, rgba(0,0,0,)1 0%);"></div>';
+    var scaledStat = (stat / 200) * 100;
+    return stat + ' <div class="progress bar stat" style="background: -o-linear-gradient(left, '+ color1 +' '+scaledStat+'%, rgba(0,0,0,1) 0%); background: -moz-linear-gradient(left, '+ color1 +' '+scaledStat+'%, rgba(0,0,0,1) 0%); background: -webkit-linear-gradient(left, '+ color1 +' '+scaledStat+'%, rgba(0,0,0,1) 0%); background: linear-gradient(left, '+ color1 +' '+scaledStat+'%, rgba(0,0,0,1) 0%); background: -ms-linear-gradient(left, '+ color1 +' '+scaledStat+'%, rgba(0,0,0,)1 0%);"></div>';
 }
 
 function makeGenderBar(percent, color1, color2) {
