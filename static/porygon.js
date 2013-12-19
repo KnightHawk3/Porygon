@@ -14,11 +14,6 @@ function parsePokedex($container, pokedex) {
         } else {
             $li.append('<div class="types-container">Types: <span class="types">' + pokedex[pokemon]["types"][0] + "</span></div>");
         }
-
-        // Create some Gender Ratio Bars
-        if (pokedex[pokemon]["gender ratio"]){
-            // if they have a gender ratio value, create a bar filled with blue to the percent male, therefore leaving the rest pink
-            $li.append('Gender:<div class="gender-container">' + makeGenderBar(pokedex[pokemon]["gender ratio"]["M"]*100, '#3399FF', '#FF99CC'));
         // Create some base stat bars
         $li.append('<table style="width:100%">');
         $li.append('<tr><td>HP: </td><td style="width:200">' + makeStatBar(pokedex[pokemon]["base stats"]["hp"], "#FF5050") + "</td></tr>");
@@ -28,6 +23,11 @@ function parsePokedex($container, pokedex) {
         $li.append('<tr><td>Sp. Def: </td><td>' + makeStatBar(pokedex[pokemon]["base stats"]["spd"], "#0033CC") + "</td></tr>");
         $li.append('<tr><td>Speed: </td><td>' +   makeStatBar(pokedex[pokemon]["base stats"]["spe"], "#00CC00") + "</td></tr>");
         $li.append('</table>');
+
+        // Create some Gender Ratio Bars
+        if (pokedex[pokemon]["gender ratio"]){
+            // if they have a gender ratio value, create a bar filled with blue to the percent male, therefore leaving the rest pink
+            $li.append('Gender:<div class="gender-container">' + makeGenderBar(pokedex[pokemon]["gender ratio"]["M"]*100, '#3399FF', '#FF99CC'));
         // If the pokemon has a gender value (and therefore is all one gender)
         } else if (pokedex[pokemon]["gender"]) {
             // If they are all male, make an all male bar
