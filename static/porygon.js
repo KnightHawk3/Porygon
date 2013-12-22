@@ -123,17 +123,27 @@ function makeGenderBar(percent, color1, color2) {
 function toggleGenderBars(box) {
     if (box.checked) {
         $(".gender-container").css("display", "block");
+        localStorage.setItem('genderbox', "true");
     } else {
         $(".gender-container").css("display", "none");
+        localStorage.setItem('genderbox', 'false')
     }
+}
+if (localStorage.getItem('genderbox') == "false") {
+    document.getElementById('genderbox').checked = false;
 }
 
 function toggleStatBars(box) {
     if (box.checked) {
         $(".stat-container").css("display", "block");
+        localStorage.setItem('statbox', "true");
     } else {
         $(".stat-container").css("display", "none");
+        localStorage.setItem('statbox', 'false')
     }
+}
+if (localStorage.getItem('statbox') == "false") {
+    document.getElementById('statbox').checked = false;
 }
 
 parsePokedex($("#pokemon"), pokedex_dictionary);
@@ -144,3 +154,5 @@ var options = {
 
 var userList = new List('pokemon', options);
 userList.sort('id', {asc:true});
+
+statboxStatus = document.getElementById('statbox');
