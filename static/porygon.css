@@ -30,7 +30,6 @@ h3 {
 .pokemon-card {
     text-transform: capitalize;
     width: 280px;
-    height: 360px;
     background-color: #F0F0F0;
     padding: 10px !important;
     margin: 5px;
