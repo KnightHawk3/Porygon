@@ -1,49 +1,106 @@
+var types = ["bug", "electric", "fire", "grass", "normal", "rock", "dark", "dragon", "fairy", "fight", "flying", "ghost", "ground", "ice", "poison", "psychc", "steel", "water"];
+// I am so sorry for writing this
 function parsePokedex($container, pokedex) {
+    // Begin the unordered list
     var $ul = $('<ul class="list list-inline">');
 
+    // Loop over this for every pokemon
     for (var pokemon in pokedex) {
         var $li = $('<li class="pokemon-card">'); // Start the item for the pokemon
         // Print the name of the pokemon as a H1 class name
         $li.append('<h3 class="name">' + pokemon + '</h3>');
         // Print the ID of the pokemon div class id-container span class id
         $li.append('<div class="id-container">Pokedex Number: <span class="id">' + pokedex[pokemon]["num"] + "</span></div>");
+        // -- Abilities -- 
+        $li.append('<div class="ability-container">Abilities: ');
+        for (var ability in pokedex[pokemon]["abilities"]) {
+            if (ability == "0") {
+                $li.append('<span class="abilitiy"> '+ pokedex[pokemon]["abilities"][ability] +'</span>');
+            }
+            if (ability == "1") {
+                $li.append(', <span class="abilitiy"> '+ pokedex[pokemon]["abilities"][ability] +'</span>');
+            }
+            if (ability == "h") {
+                $li.append(', <span class="abilitiy"> '+ pokedex[pokemon]["abilities"][ability] +' (H)</span>');
+            }
+        }
+        // -- Abilities --
+        $li.append("</div>");
         
         // Print the types of the pokemon
         $li.append('<div class="types-container">Type(s): <span class="types">' + pokedex[pokemon]["types"].join(", ") + "</span></div>");
 
+        // -- Weaknesses --
+        var superEffective = [];
+        var ultraEffective = [];
+        var kindaResistant = [];
+        var ultraResistant = [];
+        var immune = [];
+        var content = '<table class="table-striped weakness-table">';
+        $li.append('<div class="weakness-container">');
+        for (var i = 0; i < types.length; i++) {
+            if (pokedex[pokemon]["types"][1]) {
+                if (weaknesschart[pokedex[pokemon]["types"][0]][types[i]] == 3|| weaknesschart[pokedex[pokemon]["types"][1]][types[i]] == 3) {
+                    immune.push(types[i]);
+                } else {
+                    var typeSum = weaknesschart[pokedex[pokemon]["types"][0]] [types[i]] + weaknesschart[pokedex[pokemon]["types"][1]][types[i]];
+                }
+            } else {
+                if (weaknesschart[pokedex[pokemon]["types"][0]][types[i]] == 3) {
+                    immune.push(types[i]);
+                } else {
+                    var typeSum = weaknesschart[pokedex[pokemon]["types"][0]][types[i]];
+                }
+            }
+            if (typeSum == 1) {
+                superEffective.push(types[i]);
+            } else if (typeSum == -1) {
+                kindaResistant.push(types[i]);
+            } else if (typeSum == -2) {
+                ultraResistant.push(types[i]);
+            } else if (typeSum == 2) {
+                ultraEffective.push(types[i]);
+            }
+        }
+        content += '<tr><td> Super Weak </td> <td>' + ultraEffective.join(", ") + "</td></tr>";
+        content += '<tr><td> Weak </td> <td>' + superEffective.join(", ") + "</td></tr>";
+        content += '<tr><td> Resistant </td> <td>' + kindaResistant.join(", ") + "</td></tr>";
+        content += '<tr><td> Super Resistant </td> <td>' + ultraResistant.join(", ") + "</tr>";
+        content += '<tr><td> Immune </td> <td>' + immune.join(", ") + "</tr>";
+        content += "</table>";
+        $li.append(content);
+        $li.append('</div>');
+        // -- Weaknesses --
+
+        // Egg groups
         $li.append('<div class="egg-container"> Egg Group(s): <span class="egg-groups">' + pokedex[pokemon]["egg groups"].join(", ") + "</span>");
         // Create some base stat bars
-        $li.append('<table style="width:100%">');
-        $li.append('<tr><td>HP: </td><td style="width:20">' + makeStatBar(pokedex[pokemon]["base stats"]["hp"], "#FF5050") + "</td></tr>");
-        $li.append('<tr><td>Attack: </td><td>' +  makeStatBar(pokedex[pokemon]["base stats"]["atk"], "#FF9933") + "</td></tr>");
-        $li.append('<tr><td>Defence: </td><td>' + makeStatBar(pokedex[pokemon]["base stats"]["def"], "#FFFF94") + "</td></tr>");
-        $li.append('<tr><td>Sp. Atk: </td><td>' + makeStatBar(pokedex[pokemon]["base stats"]["spa"], "#0099FF") + "</td></tr>");
-        $li.append('<tr><td>Sp. Def: </td><td>' + makeStatBar(pokedex[pokemon]["base stats"]["spd"], "#0033CC") + "</td></tr>");
-        $li.append('<tr><td>Speed: </td><td>' +   makeStatBar(pokedex[pokemon]["base stats"]["spe"], "#00CC00") + "</td></tr>");
-        $li.append('</table>');
-
+        $li.append('<table class="stat-container"><tr><td>HP: </td><td style="width:20">' + makeStatBar(pokedex[pokemon]["base stats"]["hp"], "#FF5050") + "</td></tr>"
+       + '<tr><td>Attack: </td><td>' +  makeStatBar(pokedex[pokemon]["base stats"]["atk"], "#FF9933") + "</td></tr>"
+       + '<tr><td>Defence: </td><td>' + makeStatBar(pokedex[pokemon]["base stats"]["def"], "#FFFF94") + "</td></tr>"
+       + '<tr><td>Sp. Atk: </td><td>' + makeStatBar(pokedex[pokemon]["base stats"]["spa"], "#0099FF") + "</td></tr>"
+       + '<tr><td>Sp. Def: </td><td>' + makeStatBar(pokedex[pokemon]["base stats"]["spd"], "#0033CC") + "</td></tr>"
+       + '<tr><td>Speed: </td><td>' +   makeStatBar(pokedex[pokemon]["base stats"]["spe"], "#00CC00") + "</td></tr></table>");
         // Create some Gender Ratio Bars
         if (pokedex[pokemon]["gender ratio"]){
             // if they have a gender ratio value, create a bar filled with blue to the percent male, therefore leaving the rest pink
-            $li.append('Gender:<div class="gender-container">' + makeGenderBar(pokedex[pokemon]["gender ratio"]["M"]*100, '#3399FF', '#FF99CC'));
+            $li.append('<div class="gender-container">Gender:</br>' + makeGenderBar(pokedex[pokemon]["gender ratio"]["m"]*100, '#3399FF', '#FF99CC'));
         // If the pokemon has a gender value (and therefore is all one gender)
         } else if (pokedex[pokemon]["gender"]) {
             // If they are all male, make an all male bar
-            if (pokedex[pokemon]["gender"] == "M") {
-                $li.append('Gender:<div class="gender-container">' + makeGenderBar(100, '#3399FF', '#FF99CC')+ '</div>');
+            if (pokedex[pokemon]["gender"] == "m") {
+                $li.append('<div class="gender-container">Gender:</br>' + makeGenderBar(100, '#3399FF', '#FF99CC')+ '</div>');
             // If they are all female, make an all female bar
-            } else if (pokedex[pokemon]["gender"] == "F"){
-                $li.append('Gender:<div class="gender-container">' + makeGenderBar(0, '#3399FF', '#FF99CC')+ '</div>');
+            } else if (pokedex[pokemon]["gender"] == "f"){
+                $li.append('<div class="gender-container">Gender:</br>' + makeGenderBar(0, '#3399FF', '#FF99CC')+ '</div>');
             // If they dont have either then make a genderless bar
             } else {
-                $li.append('Gender:<div class="gender-container">' + makeGenderBar()+ '</div>');
+                $li.append('<div class="gender-container">Gender:</br>' + makeGenderBar()+ '</div>');
             }
         // If they dont have a gender or a gender ratio then they are 50/50, make a 50% male bar
         } else {
-                $li.append('Gender:<div class="gender-container">' + makeGenderBar(50, '#3399FF', '#FF99CC')+ '</div>');
+                $li.append('<div class="gender-container">Gender:</br>' + makeGenderBar(50, '#3399FF', '#FF99CC')+ '</div>');
         }
-
-
         $ul.append($li); // Add the item to the list
     }
     $container.append($ul); // Add the list to the div
@@ -63,10 +120,26 @@ function makeGenderBar(percent, color1, color2) {
     return background;
 }
 
+function toggleGenderBars(box) {
+    if (box.checked) {
+        $(".gender-container").css("display", "block");
+    } else {
+        $(".gender-container").css("display", "none");
+    }
+}
+
+function toggleStatBars(box) {
+    if (box.checked) {
+        $(".stat-container").css("display", "block");
+    } else {
+        $(".stat-container").css("display", "none");
+    }
+}
+
 parsePokedex($("#pokemon"), pokedex_dictionary);
 
 var options = {
-  valueNames: ['name', 'id', 'types', 'egg-groups']
+  valueNames: ['name', 'id', 'egg-groups']
 };
 
 var userList = new List('pokemon', options);

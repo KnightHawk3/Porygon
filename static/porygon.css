@@ -19,9 +19,18 @@ h3 {
     display: inline;
 }
 
+.weakness-table {
+    font-size: 14;
+}
+
+.stat-container {
+    font-size: 14;
+    line-height: 1.45;
+}
 .pokemon-card {
+    text-transform: capitalize;
     width: 280px;
-    height: 300px;
+    height: 360px;
     background-color: #F0F0F0;
     padding: 10px !important;
     margin: 5px;

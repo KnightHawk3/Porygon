@@ -13,6 +13,7 @@
 
     <script src="/static/jquery-2.0.3.min.js" type="text/javascript"></script>
     <script src="/static/pokedex.json" type="text/javascript"></script>
+    <script src="/static/typechart.js" type="text/javascript"></script>
 </head>
 <body>
 <div class="donate text-muted"><script id='fb9atlt'>(function(i){var f,s=document.getElementById(i);f=document.createElement('iframe');f.src='//api.flattr.com/button/view/?uid=KnightHawk3&button=compact&url='+encodeURIComponent(document.URL);f.title='Flattr';f.height=20;f.width=110;f.style.borderWidth=0;s.parentNode.insertBefore(f,s);})('fb9atlt');</script></div>
@@ -25,6 +26,9 @@
             <p class="lead">Porygon is a pok&eacutedex website, you can search by; name, type, pok&eacutedex id and egg group. The search is also instant, try the search!</p>
             <div id="pokemon">
                 <div id="search-container">
+                    <label><input checked type="checkbox" onclick="toggleGenderBars(this)"> Show Gender Ratios </label>
+                    <label><input checked type="checkbox" onclick="toggleStatBars(this)"> Show Base Stats</label>
+                    </br>
                     <input class="search form-control form-search" placeholder="Search" />
                     <button class="sort btn search-button" data-sort="name"> Sort by name </button>
                     <button class="sort btn search-button" data-sort="id"> Sort by id </button>
