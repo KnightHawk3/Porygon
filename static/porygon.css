@@ -15,8 +15,21 @@ h3 {
     display: inline;
 }
 
+h4 {
+    text-align: left !important;
+}
+
 .stat {
     display: inline;
+}
+/*
+.ability-container, .types-container, .weakness-container, .egg-container, .stat-contiainer, .gender-container {
+    padding: 5 0px;
+}
+*/
+
+.hidden-ability {
+    color: #6DD3FF;
 }
 
 .weakness-table {
