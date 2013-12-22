@@ -10,7 +10,7 @@ function parsePokedex($container, pokedex) {
         // Print the name of the pokemon as a H1 class name
         $li.append('<h3 class="name">' + pokemon + '</h3>');
         // Print the ID of the pokemon div class id-container span class id
-        $li.append('<div class="id-container">Pokedex Number: <span class="id">' + pokedex[pokemon]["num"] + "</span></div>");
+        $li.append('<span class="id">#' + pokedex[pokemon]["num"] + "</span></div>");
         // -- Abilities -- 
         $li.append('<div class="ability-container">Abilities: ');
         for (var ability in pokedex[pokemon]["abilities"]) {
@@ -36,7 +36,7 @@ function parsePokedex($container, pokedex) {
         var kindaResistant = [];
         var ultraResistant = [];
         var immune = [];
-        var content = '<table class="table-striped weakness-table">';
+        var content = '<table class="table-bordered weakness-table">';
         $li.append('<div class="weakness-container">');
         for (var i = 0; i < types.length; i++) {
             if (pokedex[pokemon]["types"][1]) {

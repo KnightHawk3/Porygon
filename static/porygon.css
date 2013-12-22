@@ -27,8 +27,18 @@ h3 {
     font-size: 14;
     line-height: 1.45;
 }
+
+
+table {
+    border: 1px;
+}
+
+.progress {
+    box-shadow: 0px 0px 1px rgba(0, 0, 0, 1.0) inset;
+}
 .pokemon-card {
     text-transform: capitalize;
+    vertical-align: top;
     width: 280px;
     background-color: #F0F0F0;
     padding: 10px !important;
