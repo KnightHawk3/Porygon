@@ -1,4 +1,4 @@
-var types = ["bug", "electric", "fire", "grass", "normal", "rock", "dark", "dragon", "fairy", "fight", "flying", "ghost", "ground", "ice", "poison", "psychc", "steel", "water"];
+var types = ["bug", "electric", "fire", "grass", "normal", "rock", "dark", "dragon", "fairy", "fighting", "flying", "ghost", "ground", "ice", "poison", "psychc", "steel", "water"];
 // I am so sorry for writing this
 function parsePokedex($container, pokedex) {
     // Begin the unordered list
