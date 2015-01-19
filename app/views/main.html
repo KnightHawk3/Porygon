@@ -1,0 +1,114 @@
+<div class="container">
+    <h2> Pokedex </h2>
+
+    <form class="form-inline">
+        <input ng-model="query" type="text" placeholder="filter by" autofocus>
+    </form>
+
+
+    <div class="pokemon col-md-4" ng-repeat="pokemon in pokedex | filter:query | limitTo: 9">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h2 class="panel-title"><small>#</small>{{ pokemon.num }}</h3>
+            </div>
+            <div class="panel-body">
+                <div class="pokemon-image">
+			<img src="http://www.serebii.net/xy/pokemon/00{{pokemon.num}}.png" ng-if="pokemon.num <= 9 && !pokemon.formeLetter"class="img-responsive"/>
+			<img src="http://www.serebii.net/xy/pokemon/00{{pokemon.num}}-{{pokemon.formeLetter.toLowerCase()}}.png" ng-if="pokemon.num <= 9 && pokemon.formeLetter"class="img-responsive"/>
+			<img src="http://www.serebii.net/xy/pokemon/0{{pokemon.num}}.png" ng-if="pokemon.num <= 99 && pokemon.num >= 10 && !pokemon.formeLetter" class="img-responsive"/>
+			<img src="http://www.serebii.net/xy/pokemon/0{{pokemon.num}}-{{pokemon.formeLetter.toLowerCase()}}.png" ng-if="pokemon.num <= 99 && pokemon.num >= 10 && pokemon.formeLetter" class="img-responsive"/>
+			<img src="http://www.serebii.net/xy/pokemon/{{pokemon.num}}.png" ng-if="pokemon.num > 99 && !pokemon.formeLetter" class="img-responsive"/>
+			<img src="http://www.serebii.net/xy/pokemon/{{pokemon.num}}-{{pokemon.formeLetter.toLowerCase()}}.png" ng-if="pokemon.num > 99 && pokemon.formeLetter" class="img-responsive"/>
+                </div>
+                <dl>
+                    <dt>Species</dd>
+                    <dd>{{ pokemon.species }}</dd>
+                    <dt>Typing</dd>
+                    <dd><span ng-repeat="type in pokemon.types">{{ type }} </span></dd>
+                </dl>
+
+                <div class=statbar>
+                    <span class="pull-left statnum">{{pokemon.baseStats.hp}}</span>
+                    <div class="statbar progress">
+                        <div class="progress-bar" role="progressbar" aria-valuenow="{{(pokemon.baseStats.hp/255) * 100}}" aria-valuemin="0" aria-valuemax="100" style="width: {{(pokemon.baseStats.hp / 255) * 100}}%;">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="statbar">
+                    <span class="pull-left statnum">{{pokemon.baseStats.atk}}</span>
+                    <div class="statbar progress">
+                        <div class="progress-bar" role="progressbar" aria-valuenow="{{(pokemon.baseStats.atk/255) * 100}}" aria-valuemin="0" aria-valuemax="100" style="width: {{(pokemon.baseStats.atk / 255) * 100}}%;">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="statbar">
+                    <span class="pull-left statnum">{{pokemon.baseStats.def}}</span>
+                    <div class="statbar progress">
+                        <div class="progress-bar" role="progressbar" aria-valuenow="{{(pokemon.baseStats.def/255) * 100}}" aria-valuemin="0" aria-valuemax="100" style="width: {{(pokemon.baseStats.def / 255) * 100}}%;">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="statbar">
+                    <span class="pull-left statnum">{{pokemon.baseStats.spa}}</span>
+                    <div class="statbar progress">
+                        <div class="progress-bar" role="progressbar" aria-valuenow="{{(pokemon.baseStats.spa/255) * 100}}" aria-valuemin="0" aria-valuemax="100" style="width: {{(pokemon.baseStats.spa / 255) * 100}}%;">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="statbar">
+                    <span class="pull-left statnum">{{pokemon.baseStats.spd}}</span>
+                    <div class="statbar progress">
+                        <div class="progress-bar" role="progressbar" aria-valuenow="{{(pokemon.baseStats.spd/255) * 100}}" aria-valuemin="0" aria-valuemax="100" style="width: {{(pokemon.baseStats.spd / 255) * 100}}%;">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="statbar">
+                    <span class="pull-left statnum">{{pokemon.baseStats.spe}}</span>
+                    <div class="statbar progress">
+                        <div class="progress-bar" role="progressbar" aria-valuenow="{{(pokemon.baseStats.spe/255) * 100}}" aria-valuemin="0" aria-valuemax="100" style="width: {{(pokemon.baseStats.spe/ 255) * 100}}%;">
+                        </div>
+                    </div>
+                </div>
+
+                <table class="table">
+                    <tr>
+                        <th> Effectiveness </th>
+                        <th> Type </th>
+                    </tr>
+
+                    <tr>
+                        <td> Ultra Effective </td>
+                        <td> <span ng-repeat="kind in types" ng-if="getEffectiveness(kind, pokemon.types) === 2">{{type}} </span> </td>
+                    </tr>
+
+                    <tr>
+                        <td> Super Effective </td>
+                        <td> <span ng-repeat="type in types" ng-if="getEffectiveness(type, pokemon.types) === 1">{{type}} </span> </td>
+                    </tr>
+                    
+                    <tr>
+                        <td> Resisted </td>
+                        <td> <span ng-repeat="type in types" ng-if="getEffectiveness(type, pokemon.types) === -1">{{type}} </span> </td>
+                    </tr>
+
+                    <tr>
+                        <td> Ultra Resisted </td>
+                        <td> <span ng-repeat="type in types" ng-if="getEffectiveness(type, pokemon.types) === -2">{{type}} </span> </td>
+                    </tr>
+                    
+                    <tr>
+                        <td> Immune </td>
+                        <td> <span ng-repeat="type in types" ng-if="getImmunity(type, pokemon.types) === false">{{type}} </span> </td>
+                    </tr>
+
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>
