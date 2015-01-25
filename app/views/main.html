@@ -1,24 +1,34 @@
 <div class="container">
     <h2> Pokedex </h2>
 
-    <form class="form-inline">
-        <input ng-model="query" type="text" placeholder="filter by" autofocus>
+    Use the search box to search the page.
+    
+    <form>
+        <input ng-model="query" type="text" placeholder="Enter a query">
+        <!--
+        <label ng-repeat="type in types">
+            <input type="checkbox" checklist-model="filter.checkboxes" checklist-value="type"> {{type}}
+        </label>
+        --!>
+        <select ng-model="filter.checkboxes" ng-options="type for type in types"> </select>
     </form>
 
+    </br>
 
-    <div class="pokemon col-md-4" ng-repeat="pokemon in pokedex | filter:query | limitTo: 9">
+
+    <div class="pokemon col-md-3" ng-repeat="pokemon in pokedex | filter:query | filter:filterByType | limitTo: 12">
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h2 class="panel-title"><small>#</small>{{ pokemon.num }}</h3>
             </div>
             <div class="panel-body">
-                <div class="pokemon-image">
-			<img src="http://www.serebii.net/xy/pokemon/00{{pokemon.num}}.png" ng-if="pokemon.num <= 9 && !pokemon.formeLetter"class="img-responsive"/>
-			<img src="http://www.serebii.net/xy/pokemon/00{{pokemon.num}}-{{pokemon.formeLetter.toLowerCase()}}.png" ng-if="pokemon.num <= 9 && pokemon.formeLetter"class="img-responsive"/>
-			<img src="http://www.serebii.net/xy/pokemon/0{{pokemon.num}}.png" ng-if="pokemon.num <= 99 && pokemon.num >= 10 && !pokemon.formeLetter" class="img-responsive"/>
-			<img src="http://www.serebii.net/xy/pokemon/0{{pokemon.num}}-{{pokemon.formeLetter.toLowerCase()}}.png" ng-if="pokemon.num <= 99 && pokemon.num >= 10 && pokemon.formeLetter" class="img-responsive"/>
-			<img src="http://www.serebii.net/xy/pokemon/{{pokemon.num}}.png" ng-if="pokemon.num > 99 && !pokemon.formeLetter" class="img-responsive"/>
-			<img src="http://www.serebii.net/xy/pokemon/{{pokemon.num}}-{{pokemon.formeLetter.toLowerCase()}}.png" ng-if="pokemon.num > 99 && pokemon.formeLetter" class="img-responsive"/>
+                <div class="pokemon-container">
+			<img src="http://www.serebii.net/xy/pokemon/00{{pokemon.num}}.png" ng-if="pokemon.num <= 9 && !pokemon.formeLetter" class="img-pokemon"/>
+			<img src="http://www.serebii.net/xy/pokemon/00{{pokemon.num}}-{{pokemon.formeLetter.toLowerCase()}}.png" ng-if="pokemon.num <= 9 && pokemon.formeLetter"class="img-pokemon"/>
+			<img src="http://www.serebii.net/xy/pokemon/0{{pokemon.num}}.png" ng-if="pokemon.num <= 99 && pokemon.num >= 10 && !pokemon.formeLetter" class="img-pokemon"/>
+			<img src="http://www.serebii.net/xy/pokemon/0{{pokemon.num}}-{{pokemon.formeLetter.toLowerCase()}}.png" ng-if="pokemon.num <= 99 && pokemon.num >= 10 && pokemon.formeLetter" class="img-pokemon"/>
+			<img src="http://www.serebii.net/xy/pokemon/{{pokemon.num}}.png" ng-if="pokemon.num > 99 && !pokemon.formeLetter" class="img-pokemon"/>
+			<img src="http://www.serebii.net/xy/pokemon/{{pokemon.num}}-{{pokemon.formeLetter.toLowerCase()}}.png" ng-if="pokemon.num > 99 && pokemon.formeLetter" class="img-pokemon"/>
                 </div>
                 <dl>
                     <dt>Species</dd>
@@ -77,33 +87,52 @@
 
                 <table class="table">
                     <tr>
-                        <th> Effectiveness </th>
+                        <th> Damage </th>
                         <th> Type </th>
                     </tr>
 
                     <tr>
-                        <td> Ultra Effective </td>
-                        <td> <span ng-repeat="kind in types" ng-if="getEffectiveness(kind, pokemon.types) === 2">{{type}} </span> </td>
+                        <td> 4x </td>
+                        <td>
+                            <span ng-repeat="type in types" ng-if="getEffectiveness(type, pokemon.types) === 2" class="type-icon type-{{type}}">
+                                {{type.substring(0, 3)}} 
+                            </span>
+                        </td>
                     </tr>
-
                     <tr>
-                        <td> Super Effective </td>
-                        <td> <span ng-repeat="type in types" ng-if="getEffectiveness(type, pokemon.types) === 1">{{type}} </span> </td>
-                    </tr>
-                    
-                    <tr>
-                        <td> Resisted </td>
-                        <td> <span ng-repeat="type in types" ng-if="getEffectiveness(type, pokemon.types) === -1">{{type}} </span> </td>
-                    </tr>
-
-                    <tr>
-                        <td> Ultra Resisted </td>
-                        <td> <span ng-repeat="type in types" ng-if="getEffectiveness(type, pokemon.types) === -2">{{type}} </span> </td>
+                        <td> 2x </td>
+                        <td>
+                            <span ng-repeat="type in types" ng-if="getEffectiveness(type, pokemon.types) === 1" class="type-icon type-{{type}}">
+                                {{type.substring(0, 3)}} 
+                            </span>
+                        </td>
                     </tr>
                     
                     <tr>
-                        <td> Immune </td>
-                        <td> <span ng-repeat="type in types" ng-if="getImmunity(type, pokemon.types) === false">{{type}} </span> </td>
+                        <td> .5x </td>
+                        <td>
+                            <span ng-repeat="type in types" ng-if="getEffectiveness(type, pokemon.types) === -1" class="type-icon type-{{type}}">
+                                {{type.substring(0, 3)}} 
+                            </span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td> .25x </td>
+                        <td>
+                            <span ng-repeat="type in types" ng-if="getEffectiveness(type, pokemon.types) === -2" class="type-icon type-{{type}}">
+                                {{type.substring(0, 3)}} 
+                            </span>
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td> 0x </td>
+                        <td>
+                            <span ng-repeat="type in types" ng-if="getImmunity(type, pokemon.types) === false" class="type-icon type-{{type}}">
+                                {{type.substring(0, 3)}}
+                            </span>
+                        </td>
                     </tr>
 
                 </table>

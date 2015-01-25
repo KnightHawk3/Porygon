@@ -8,6 +8,7 @@
  *
  * Main module of the application.
  */
+
 angular
   .module('porygonApp', [
     'ngAnimate',
@@ -16,7 +17,8 @@ angular
     'ngRoute',
     'ngSanitize',
     'ngTouch',
-    'ui.sortable'
+    'ui.sortable',
+    'checklist-model'
   ])
   .config(function ($routeProvider) {
     $routeProvider

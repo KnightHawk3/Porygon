@@ -437,31 +437,47 @@ var TypeChart = {
 };
 
 
-
-angular.module('porygonApp').filter('pokeOrder', function() {
-    return function(object) {
-        var array = [];
-        angular.forEach(object, function (value, key) { 
-            array.push({key: key, value: value});
-        });
-        return array;
-    };
-});
-
 angular.module('porygonApp').controller('MainCtrl', function ($scope) {
+    $scope.filter = {
+        checkboxes: []
+    };
+
+    $scope.filterByType = function(pokemon) {
+        // If no checkboxes are checked, display it.
+        if ($scope.filter.checkboxes.length <= 0) {
+            return true;
+        }
+
+        // If any of the types match a checkbox, return true.
+        for (var i = 0; i < pokemon.types.length; i++) {
+            for (var j = 0; i < $scope.filter.checkboxes.length; i++) {
+                if (pokemon.types[i] === $scope.filter.checkboxes[j]) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    };
     $scope.pokedex = BattlePokedex;
-    $scope.types = [ 'Bug', 'Dark', 'Dragon', 'Electric', 'Fairy', 'Fighting', 'Fire', 'Flying', 'Ghost', 'Grass', 'Ground', 'Ice', 'Normal', 'Poison', 'Psychic', 'Rock', 'Steel', 'Water'];
+    $scope.types = [ 'Bug', 'Dark', 'Dragon', 'Electric', 'Fairy', 'Fighting',
+                     'Fire', 'Flying', 'Ghost', 'Grass', 'Ground', 'Ice', 'Normal',
+                     'Poison', 'Psychic', 'Rock', 'Steel', 'Water'];
     $scope.getImmunity = function (sourceType, targetTyping) {
             // returns false if the target is immune; true otherwise
             // also checks immunity to some statuses
             if (Array.isArray(targetTyping)) {
                     for (var i = 0; i < targetTyping.length; i++) {
-                            if (!this.getImmunity(sourceType, targetTyping[i])) return false;
+                            if (!this.getImmunity(sourceType, targetTyping[i])) {
+                                return false;
+                            }
                     }
                     return true;
             }
             var typeData = TypeChart[targetTyping];
-            if (typeData && typeData.damageTaken[sourceType] === 3) return false;
+            if (typeData && typeData.damageTaken[sourceType] === 3) {
+                return false;
+            }
             return true;
     };
 
@@ -476,7 +492,9 @@ angular.module('porygonApp').controller('MainCtrl', function ($scope) {
             return totalTypeMod;
         }
         var typeData = TypeChart[targetTyping];
-        if (!typeData) return 0;
+        if (!typeData) {
+            return 0;
+        }
         switch (typeData.damageTaken[source]) {
             case 1: return 1; // super-effective
             case 2: return -1; // resist
