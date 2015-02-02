@@ -5,18 +5,20 @@
     
     <form>
         <input ng-model="query" type="text" placeholder="Enter a query">
+        <input ng-model="limit" type="text" placeholder="24" only-digits>
         <!--
         <label ng-repeat="type in types">
             <input type="checkbox" checklist-model="filter.checkboxes" checklist-value="type"> {{type}}
         </label>
         --!>
-        <select ng-model="filter.checkboxes" ng-options="type for type in types"> </select>
+        <select ng-model="filter.typeOne" ng-options="type for type in types"> </select>
+        <select ng-model="filter.typeTwo" ng-options="type for type in types"> </select>
     </form>
 
     </br>
 
 
-    <div class="pokemon col-md-3" ng-repeat="pokemon in pokedex | filter:query | filter:filterByType | limitTo: 12">
+    <div class="pokemon col-md-3" ng-repeat="pokemon in pokedex | filter:query | filter:filterByTypeOne | filter:filterByTypeTwo | limitTo: limit">
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h2 class="panel-title"><small>#</small>{{ pokemon.num }}</h3>

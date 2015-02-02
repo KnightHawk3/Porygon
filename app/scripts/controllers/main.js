@@ -436,31 +436,69 @@ var TypeChart = {
 	}
 };
 
+angular.module('porygonApp').directive('onlyDigits', function () {
+    return {
+        restrict: 'A',
+        require: '?ngModel',
+        link: function ($scope, element, attrs, ngModel) {
+            if (!ngModel) return;
+            ngModel.$parsers.unshift(function (inputValue) {
+                var digits = inputValue.split('').filter(function (s) {
+                                return (!isNaN(s) && s != ' ');
+                             }).join('');
+                ngModel.$viewValue = digits;
+                ngModel.$render();
+                return digits;
+            });
+        }
+    };
+});
 
 angular.module('porygonApp').controller('MainCtrl', function ($scope) {
+    $scope.limit = 24;
     $scope.filter = {
-        checkboxes: []
+        typeOne: "(none)",
+        typeTwo: "(none)"
     };
 
-    $scope.filterByType = function(pokemon) {
+    $scope.filterByTypeOne = function(pokemon) {
         // If no checkboxes are checked, display it.
-        if ($scope.filter.checkboxes.length <= 0) {
+        if ($scope.filter.typeOne === "" || $scope.filter.typeOne === "(none)") {
             return true;
         }
 
         // If any of the types match a checkbox, return true.
         for (var i = 0; i < pokemon.types.length; i++) {
-            for (var j = 0; i < $scope.filter.checkboxes.length; i++) {
-                if (pokemon.types[i] === $scope.filter.checkboxes[j]) {
+            //for (var j = 0; i < $scope.filter.checkboxes.length; i++) {
+                if (pokemon.types[i] === $scope.filter.typeOne) {
                     return true;
                 }
-            }
+            //}
         }
 
         return false;
     };
+
+    $scope.filterByTypeTwo = function(pokemon) {
+        // If no checkboxes are checked, display it.
+        if ($scope.filter.typeTwo === "" || $scope.filter.typeTwo === "(none)") {
+            return true;
+        }
+
+        // If any of the types match a checkbox, return true.
+        for (var i = 0; i < pokemon.types.length; i++) {
+            //for (var j = 0; i < $scope.filter.checkboxes.length; i++) {
+                if (pokemon.types[i] === $scope.filter.typeTwo) {
+                    return true;
+                }
+            //}
+        }
+
+        return false;
+    };
+
     $scope.pokedex = BattlePokedex;
-    $scope.types = [ 'Bug', 'Dark', 'Dragon', 'Electric', 'Fairy', 'Fighting',
+    $scope.types = [ '(none)', 'Bug', 'Dark', 'Dragon', 'Electric', 'Fairy', 'Fighting',
                      'Fire', 'Flying', 'Ghost', 'Grass', 'Ground', 'Ice', 'Normal',
                      'Poison', 'Psychic', 'Rock', 'Steel', 'Water'];
     $scope.getImmunity = function (sourceType, targetTyping) {
